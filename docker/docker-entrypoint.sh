@@ -66,5 +66,21 @@ fi
 chown -R www-data:www-data storage bootstrap/cache || true
 chmod -R 775 storage bootstrap/cache || true
 
+# ── Apache MPM sanity (runtime) ──────────────────────────────
+# Something (possibly a mounted volume) can re-introduce extra
+# MPMs between image build and container start. Re-assert here.
+echo "▶ Apache mods-enabled MPM files (pre-fix):"
+ls -la /etc/apache2/mods-enabled/ 2>/dev/null | grep -i mpm || true
+rm -f /etc/apache2/mods-enabled/mpm_event.* \
+      /etc/apache2/mods-enabled/mpm_worker.* || true
+ln -sf /etc/apache2/mods-available/mpm_prefork.load \
+       /etc/apache2/mods-enabled/mpm_prefork.load
+ln -sf /etc/apache2/mods-available/mpm_prefork.conf \
+       /etc/apache2/mods-enabled/mpm_prefork.conf
+echo "▶ Apache mods-enabled MPM files (post-fix):"
+ls -la /etc/apache2/mods-enabled/ 2>/dev/null | grep -i mpm || true
+echo "▶ apache2ctl -M | grep mpm:"
+apache2ctl -M 2>&1 | grep -i mpm || true
+
 echo "▶ Starting Apache on :${PORT}"
 exec "$@"
