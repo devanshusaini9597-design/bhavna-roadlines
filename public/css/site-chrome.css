@@ -1,0 +1,229 @@
+/* ================================================================
+   BHAVNA ROADLINES — SITE CHROME
+   Shared premium nav (hamburger + drawer) + footer enhancements.
+   Builds on top of home-premium.css.
+   ================================================================ */
+
+/* ---------------------------------------------------------------
+   BRAND TEXT (beside logo)
+--------------------------------------------------------------- */
+.nav-brand{gap:.85rem}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.1;transition:color .3s var(--ease)}
+.nbt-title{
+  font-family:var(--serif);font-weight:700;font-size:1.08rem;letter-spacing:.2px;
+  color:var(--white);transition:color .3s var(--ease)
+}
+.nbt-sub{
+  font-size:.66rem;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;
+  color:rgba(255,255,255,.62);margin-top:3px;transition:color .3s var(--ease)
+}
+.nav.scrolled .nbt-title,
+body.no-hero .nav .nbt-title{color:var(--g900)}
+.nav.scrolled .nbt-sub,
+body.no-hero .nav .nbt-sub{color:var(--blue)}
+
+/* ---------------------------------------------------------------
+   INNER-PAGE NAV (no hero) — solid by default
+--------------------------------------------------------------- */
+body.no-hero{padding-top:0}
+body.no-hero .nav{
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 var(--g100),0 8px 24px rgba(17,24,39,.05)
+}
+body.no-hero .nav .nav-a{color:var(--g500)}
+body.no-hero .nav .nav-a:hover,
+body.no-hero .nav .nav-a.active{color:var(--blue)}
+body.no-hero .nav .nav-ham{background:var(--g50);border-color:var(--g200)}
+body.no-hero .nav .nav-ham span{background:var(--g900)}
+
+/* ---------------------------------------------------------------
+   NAV CTA — pill with icon (desktop)
+--------------------------------------------------------------- */
+.nav-cta{display:inline-flex;align-items:center;gap:.55rem}
+.nav-cta i{font-size:.72rem;transition:transform .35s var(--ease)}
+.nav-cta:hover i{transform:translateX(3px)}
+.nav-cta span{position:relative;z-index:1}
+
+/* ---------------------------------------------------------------
+   DRAWER-ONLY ITEMS (hidden on desktop)
+--------------------------------------------------------------- */
+.nav-drawer-head,
+.nav-drawer-cta,
+.nav-drawer-contact,
+.nav-drawer-social{display:none}
+
+/* ---------------------------------------------------------------
+   HAMBURGER — refined premium look
+--------------------------------------------------------------- */
+.nav-ham{
+  position:relative;width:46px;height:46px;border-radius:12px;
+  transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)
+}
+.nav-ham:active{transform:scale(.94)}
+
+/* ---------------------------------------------------------------
+   SCROLL-TO-TOP
+--------------------------------------------------------------- */
+.scroll-top{
+  position:fixed;right:1.2rem;bottom:1.2rem;z-index:990;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--blue);color:var(--white);
+  display:flex;align-items:center;justify-content:center;font-size:.92rem;
+  box-shadow:0 10px 26px rgba(30,85,199,.4);
+  opacity:0;visibility:hidden;transform:translateY(10px) scale(.9);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s,background .3s
+}
+.scroll-top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.scroll-top:hover{background:var(--blue-dk);transform:translateY(-3px) scale(1.05)}
+
+/* ---------------------------------------------------------------
+   RESPONSIVE
+   Tablets/phones ≤1024px → hamburger drawer
+--------------------------------------------------------------- */
+@media (max-width: 1024px){
+  .nav-brand-text{display:none}
+  .nav-cta{display:none}
+  .nav-ham{display:flex}
+  .nav-wrap{gap:.8rem}
+
+  /* Drawer */
+  .nav-links{
+    position:fixed;top:0;right:-100%;width:88%;max-width:360px;
+    height:100vh;height:100dvh;
+    background:linear-gradient(165deg,#0F1B33 0%,var(--ink) 60%,#060912 100%);
+    flex-direction:column;gap:0;padding:0;
+    transition:right .42s var(--ease);
+    box-shadow:-24px 0 60px rgba(0,0,0,.55);
+    overflow-y:auto;overscroll-behavior:contain;z-index:999;
+    display:flex
+  }
+  .nav-links.open{right:0}
+
+  /* Decorative gradient top strip */
+  .nav-links::before{
+    content:'';position:sticky;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--blue),var(--blue-lite));
+    z-index:2;flex-shrink:0
+  }
+
+  /* Drawer head */
+  .nav-drawer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem 1.4rem 1rem;
+    border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0
+  }
+  .nav-drawer-brand{display:flex;align-items:center;gap:.7rem;color:#fff}
+  .nav-drawer-brand img{
+    height:42px;width:42px;border-radius:50%;background:#fff;padding:2px;
+    box-shadow:0 4px 14px rgba(30,85,199,.35)
+  }
+  .nav-drawer-brand span{
+    font-family:var(--serif);font-weight:700;font-size:1.05rem;color:#fff;letter-spacing:.2px
+  }
+  .nav-drawer-close{
+    width:38px;height:38px;border-radius:50%;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    color:#fff;display:flex;align-items:center;justify-content:center;font-size:.95rem;
+    transition:background .25s,transform .25s,border-color .25s
+  }
+  .nav-drawer-close:hover{background:var(--blue);border-color:var(--blue);transform:rotate(90deg)}
+
+  /* Links list */
+  .nav-links li{width:100%;list-style:none}
+  .nav-links > li:not(.nav-drawer-head):not(.nav-drawer-cta):not(.nav-drawer-contact):not(.nav-drawer-social){
+    padding:0 1.4rem
+  }
+  .nav-links .nav-a{
+    display:flex;align-items:center;justify-content:space-between;
+    width:100%;color:rgba(255,255,255,.88);font-size:1rem;font-weight:500;
+    padding:1.05rem .2rem;border-bottom:1px solid rgba(255,255,255,.06);
+    letter-spacing:.3px;position:relative;
+    transition:color .25s,padding-left .3s var(--ease)
+  }
+  .nav-links .nav-a::after{display:none}
+  .nav-links .nav-a::before{
+    content:'';position:absolute;left:-1.4rem;top:50%;transform:translateY(-50%) scaleY(0);
+    width:3px;height:26px;border-radius:0 3px 3px 0;
+    background:linear-gradient(180deg,var(--blue-mid),var(--blue-lite));
+    transition:transform .35s var(--ease)
+  }
+  .nav-links .nav-a:hover,
+  .nav-links .nav-a.active{color:var(--blue-lite);padding-left:.8rem}
+  .nav-links .nav-a.active::before{transform:translateY(-50%) scaleY(1)}
+  /* Reset desktop scrolled color override */
+  .nav.scrolled .nav-links .nav-a{color:rgba(255,255,255,.88)}
+  .nav.scrolled .nav-links .nav-a:hover,
+  .nav.scrolled .nav-links .nav-a.active{color:var(--blue-lite)}
+
+  /* Drawer CTA */
+  .nav-drawer-cta{display:block;padding:1.4rem 1.4rem .4rem}
+  .nav-drawer-cta .nav-cta-mobile{
+    display:flex;align-items:center;justify-content:center;gap:.6rem;
+    width:100%;padding:1rem 1.2rem;
+    background:var(--blue);color:#fff;
+    border-radius:var(--r-btn);font-weight:600;font-size:.95rem;letter-spacing:.4px;
+    box-shadow:0 12px 28px rgba(30,85,199,.45);
+    transition:background .3s,transform .3s
+  }
+  .nav-drawer-cta .nav-cta-mobile:hover{background:var(--blue-dk);transform:translateY(-2px)}
+  .nav-drawer-cta .nav-cta-mobile i{font-size:.78rem}
+
+  /* Drawer contact */
+  .nav-drawer-contact{
+    display:flex;flex-direction:column;gap:.65rem;
+    padding:1.4rem 1.4rem 1rem;margin-top:.6rem;
+    border-top:1px solid rgba(255,255,255,.08)
+  }
+  .nav-drawer-contact a{
+    display:inline-flex;align-items:center;gap:.7rem;
+    font-size:.86rem;color:rgba(255,255,255,.7);
+    transition:color .25s
+  }
+  .nav-drawer-contact a i{
+    width:28px;height:28px;border-radius:50%;
+    background:rgba(96,165,250,.12);color:var(--blue-lite);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:.72rem;flex-shrink:0
+  }
+  .nav-drawer-contact a:hover{color:var(--blue-lite)}
+
+  /* Drawer social */
+  .nav-drawer-social{
+    display:flex;gap:.55rem;padding:1rem 1.4rem 1.6rem;
+    margin-top:auto
+  }
+  .nav-drawer-social a{
+    width:38px;height:38px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    color:rgba(255,255,255,.75);font-size:.85rem;
+    transition:all .3s var(--ease)
+  }
+  .nav-drawer-social a:hover{
+    background:var(--blue);border-color:var(--blue);color:#fff;
+    transform:translateY(-3px)
+  }
+
+  /* Hide duplicate old "nav-cta-mobile" rule from home-premium.css by keeping only drawer version */
+  .nav-links > li > .nav-cta-mobile{display:none}
+}
+
+/* ---------------------------------------------------------------
+   SMALLER TWEAKS
+--------------------------------------------------------------- */
+@media (max-width: 480px){
+  .nav-links{width:92%;max-width:340px}
+  .nav-drawer-head{padding:1rem 1.1rem .85rem}
+  .nav-links > li:not(.nav-drawer-head):not(.nav-drawer-cta):not(.nav-drawer-contact):not(.nav-drawer-social){padding:0 1.1rem}
+  .nav-drawer-cta,.nav-drawer-contact,.nav-drawer-social{padding-left:1.1rem;padding-right:1.1rem}
+  .scroll-top{right:.9rem;bottom:.9rem;width:42px;height:42px}
+}
+
+/* ---------------------------------------------------------------
+   REDUCED MOTION
+--------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce){
+  .nav-links{transition:none}
+  .scroll-top{transition:opacity .01ms}
+}

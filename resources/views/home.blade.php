@@ -1,34 +1,7 @@
 @extends('layouts.premium')
 @section('title', 'Bhavna Roadlines — Trusted Logistics & Transportation Partner')
 
-@section('styles')
-<link rel="stylesheet" href="{{ asset('css/home-premium.css') }}">
-@endsection
-
 @section('content')
-
-{{-- ══════════════════════════════════
-     NAVIGATION
-══════════════════════════════════ --}}
-<nav class="nav" id="nav">
-    <div class="nav-wrap">
-        <a href="{{ route('home') }}" class="nav-brand">
-            <img src="{{ asset('images/logo.jpg') }}" alt="Bhavna Roadlines Pvt. Ltd." class="nav-brand-logo">
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#hero"                   class="nav-a active">Home</a></li>
-            <li><a href="{{ route('about') }}"    class="nav-a">About Us</a></li>
-            <li><a href="{{ route('services') }}" class="nav-a">Services</a></li>
-            <li><a href="{{ route('gallery') }}"  class="nav-a">Gallery</a></li>
-            <li><a href="#awards"                 class="nav-a">Awards</a></li>
-            <li><a href="{{ route('contact') }}"  class="nav-a">Contact</a></li>
-            <li><a href="{{ route('contact') }}"  class="nav-cta-mobile">Get a Quote <i class="fas fa-arrow-right"></i></a></li>
-        </ul>
-        <a href="{{ route('contact') }}" class="nav-cta">Get a Quote</a>
-        <button class="nav-ham" id="navHam" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-</nav>
-<div class="nav-backdrop" id="navBackdrop"></div>
 
 {{-- ══════════════════════════════════
      HERO
@@ -507,105 +480,10 @@
     </div>
 </section>
 
-{{-- ══════════════════════════════════
-     FOOTER
-══════════════════════════════════ --}}
-<footer class="pfooter">
-    <div class="container pfooter-inner">
-        <div class="pfooter-grid">
-            <div class="pfooter-brand">
-                <a href="{{ route('home') }}" class="pfooter-logo">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Bhavna Roadlines">
-                </a>
-                <p>Leading logistics &amp; transportation company moving India forward since 1999.</p>
-                <div class="pfooter-social">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="pfooter-col">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ route('services') }}">Services</a></li>
-                    <li><a href="{{ route('gallery') }}">Gallery</a></li>
-                    <li><a href="{{ route('careers') }}">Careers</a></li>
-                    <li><a href="{{ route('investor') }}">Investor Relations</a></li>
-                </ul>
-            </div>
-            <div class="pfooter-col">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="{{ route('services') }}">Full Truckload (FTL)</a></li>
-                    <li><a href="{{ route('services') }}">Part Truckload (PTL)</a></li>
-                    <li><a href="{{ route('services') }}">Express Delivery</a></li>
-                    <li><a href="{{ route('services') }}">Warehousing</a></li>
-                    <li><a href="{{ route('services') }}">ODC Transport</a></li>
-                </ul>
-            </div>
-            <div class="pfooter-col">
-                <h4>Get in Touch</h4>
-                <ul class="pfooter-contact">
-                    <li><i class="fas fa-map-marker-alt"></i><span>Industrial Area, Phase 1<br>Chandigarh — 160002</span></li>
-                    <li><i class="fas fa-phone-alt"></i><span>+91 172 XXX XXXX</span></li>
-                    <li><i class="fas fa-envelope"></i><span>info@bhavnaroadlines.in</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="pfooter-bottom">
-            <p>&copy; {{ date('Y') }} Bhavna Roadlines Pvt. Ltd. — All rights reserved.</p>
-            <p class="pfooter-legal"><a href="#">Privacy Policy</a><span>·</span><a href="#">Terms of Service</a></p>
-        </div>
-    </div>
-</footer>
-
 @endsection
 
 @section('scripts')
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-/* AOS — subtle fade-in only */
-AOS.init({ duration: 800, once: true, offset: 80, easing: 'ease-out-cubic' });
-
-/* Sticky Nav shadow on scroll */
-const nav = document.getElementById('nav');
-const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
-
-/* Mobile nav — hamburger + backdrop + body lock */
-const ham      = document.getElementById('navHam');
-const links    = document.getElementById('navLinks');
-const backdrop = document.getElementById('navBackdrop');
-
-const setNav = (open) => {
-    ham.classList.toggle('open', open);
-    links.classList.toggle('open', open);
-    backdrop.classList.toggle('open', open);
-    document.body.classList.toggle('nav-open', open);
-    ham.setAttribute('aria-expanded', open ? 'true' : 'false');
-};
-ham.addEventListener('click', () => setNav(!ham.classList.contains('open')));
-backdrop.addEventListener('click', () => setNav(false));
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false); });
-document.querySelectorAll('.nav-links a').forEach(a =>
-    a.addEventListener('click', () => setNav(false))
-);
-
-/* Smooth scroll for on-page hash links only */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-        const href = a.getAttribute('href');
-        if (href.length < 2) return;
-        const target = document.querySelector(href);
-        if (!target) return;
-        e.preventDefault();
-        window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
-    });
-});
-
 /* ── HERO PARALLAX ─────────────────────────────────────
    Video and text move at different speeds for depth. */
 const heroMedia = document.getElementById('heroMedia');
