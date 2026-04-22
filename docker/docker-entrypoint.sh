@@ -17,14 +17,33 @@ export PORT
 
 echo "▶ Binding Apache to port ${PORT}"
 
+# Validate PORT is numeric
+if ! [[ "${PORT}" =~ ^[0-9]+$ ]]; then
+    echo "⚠  Invalid PORT value: '${PORT}', falling back to 8080"
+    PORT=8080
+fi
+
 # Apache listens on ${PORT} via envvar expansion in its vhost file.
 # But `Listen ${PORT}` in conf only works if we export Apache envvars.
 export APACHE_LISTEN_PORT="${PORT}"
 
 # Rewrite the vhost (simpler than Apache's envvar machinery)
 sed -i "s/\${PORT}/${PORT}/g" /etc/apache2/sites-available/000-default.conf
-# Also clean up the default Listen 80 directive to avoid conflicts
-sed -i "s/^Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf || true
+
+# Fix ports.conf: remove any existing Listen directives and add correct one
+# This handles cases where the base image has different formatting
+if [ -f /etc/apache2/ports.conf ]; then
+    # Remove any Listen lines (handles Listen 80, Listen 8080, comments, etc.)
+    sed -i '/^Listen/d' /etc/apache2/ports.conf
+    # Add the correct Listen directive at the top
+    sed -i "1i Listen ${PORT}" /etc/apache2/ports.conf
+fi
+
+# Verify the config is valid before starting
+if ! apache2ctl configtest 2>&1 | grep -q "Syntax OK"; then
+    echo "⚠  Apache config test failed, showing ports.conf:"
+    head -10 /etc/apache2/ports.conf || true
+fi
 
 cd /var/www/html
 
