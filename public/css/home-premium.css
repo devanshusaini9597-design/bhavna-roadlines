@@ -580,22 +580,22 @@ ul,ol{list-style:none}
 .trophy-card strong{display:block;color:var(--g900);font-size:.98rem;font-weight:700;margin-bottom:2px}
 .trophy-card span{color:var(--g500);font-size:.82rem}
 
-.awards-list{position:relative;display:grid;gap:1rem;padding-left:48px}
+.awards-list{position:relative;display:grid;gap:1rem;padding-left:48px;isolation:isolate}
 
-/* Connecting vertical line + animated progress */
+/* Connecting vertical line + animated progress (always BEHIND dots) */
 .awards-list::before{
   content:'';position:absolute;left:22px;top:20px;bottom:20px;width:2px;
-  background:var(--g100);border-radius:2px
+  background:var(--g100);border-radius:2px;z-index:0
 }
 .aw-progress{
   position:absolute;left:22px;top:20px;width:2px;height:0;
   background:linear-gradient(180deg,var(--blue),var(--blue-lite));
   border-radius:2px;box-shadow:0 0 12px rgba(30,85,199,.4);
-  will-change:height
+  will-change:height;z-index:1
 }
 
 .aw-item{
-  position:relative;display:grid;
+  position:relative;z-index:2;display:grid;
   grid-template-columns:90px 120px 1fr;align-items:center;gap:1.2rem;
   padding:1.1rem 1.4rem;background:var(--white);
   border:1px solid var(--g100);border-radius:var(--r-md);

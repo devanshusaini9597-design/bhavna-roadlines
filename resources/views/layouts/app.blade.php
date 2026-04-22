@@ -17,7 +17,7 @@
             <div class="header-content">
                 <div class="logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/logo.svg') }}" alt="Bhavna Roadlines" class="logo-img" style="height: 55px;">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="Bhavna Roadlines" class="logo-img" style="height: 55px;">
                     </a>
                 </div>
                 <nav class="nav">
