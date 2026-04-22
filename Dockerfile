@@ -50,8 +50,17 @@ RUN composer install \
 COPY . .
 
 # ── Finish composer autoload + permissions ───────────────────
-RUN composer dump-autoload --optimize --no-dev \
-    && mkdir -p storage/framework/{cache/data,sessions,views,testing} storage/logs bootstrap/cache \
+# NOTE: use bash for brace expansion, and --no-scripts so artisan
+# package:discover doesn't run during build (no APP_KEY yet).
+SHELL ["/bin/bash", "-c"]
+RUN composer dump-autoload --optimize --classmap-authoritative --no-dev --no-scripts \
+    && mkdir -p \
+        storage/framework/cache/data \
+        storage/framework/sessions \
+        storage/framework/views \
+        storage/framework/testing \
+        storage/logs \
+        bootstrap/cache \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 775 storage bootstrap/cache
 
