@@ -588,13 +588,12 @@ if (awardsList && awProgress) {
         const rect = awardsList.getBoundingClientRect();
         const vh   = window.innerHeight || document.documentElement.clientHeight;
 
-        // Fill starts when list top crosses 80% viewport and completes
-        // when list bottom crosses 20% viewport — smooth & natural.
-        const start  = vh * 0.80;
-        const end    = vh * 0.20;
-        const passed = start - rect.top;                 // px scrolled past start line
-        const span   = rect.height + (start - end);      // total travel distance
-        let progress = passed / span;
+        // Trigger line sits at 65% down the viewport. Progress goes
+        // 0 → 1 as the list slides from "top at trigger" to
+        // "bottom at trigger". Once bottom passes trigger → 100% and
+        // the animation is DONE — no lingering growth after scroll.
+        const trigger = vh * 0.65;
+        let progress  = (trigger - rect.top) / Math.max(rect.height, 1);
         if (progress < 0) progress = 0;
         if (progress > 1) progress = 1;
 

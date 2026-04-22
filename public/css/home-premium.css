@@ -724,9 +724,12 @@ ul,ol{list-style:none}
 .pcta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
 /* ================================================================
-   RESPONSIVE
+   RESPONSIVE — tablets → phones → tiny phones
 ================================================================ */
+
+/* ── TABLETS (≤1024px) ─────────────────────────────────── */
 @media (max-width: 1024px){
+  .container{padding:0 1.5rem}
   .hero-inner{grid-template-columns:1fr;gap:3rem;padding:150px 1.75rem 110px}
   .hero-quote-box{justify-self:flex-start;max-width:540px}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
@@ -742,48 +745,135 @@ ul,ol{list-style:none}
   .pcta-sep{height:40px}
   .aw-item{grid-template-columns:80px 110px 1fr;gap:.9rem;padding:1rem 1.2rem}
   .vm-watermark{font-size:14rem}
+  .nav-brand-logo{height:46px}
+  .nav.scrolled .nav-brand-logo{height:42px}
 }
+
+/* ── PHONES (≤768px) ───────────────────────────────────── */
 @media (max-width: 768px){
+  html{font-size:15px}
+  .container{padding:0 1.1rem}
+  .section{padding:4.5rem 0}
+  .sec-head{margin-bottom:2.2rem}
+
+  /* nav */
+  .nav{padding:.8rem 0}
+  .nav-wrap{padding:0 1.1rem;gap:1rem}
+  .nav-brand-logo{height:44px}
+  .nav.scrolled .nav-brand-logo{height:40px}
   .nav-links{
-    position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;
+    position:fixed;top:0;right:-100%;width:82%;max-width:320px;height:100vh;
     background:var(--ink-2);flex-direction:column;gap:.5rem;padding:6rem 2rem 2rem;
-    transition:right .4s var(--ease);box-shadow:-20px 0 40px rgba(0,0,0,.4)
+    transition:right .4s var(--ease);box-shadow:-20px 0 40px rgba(0,0,0,.4);
+    overflow-y:auto
   }
   .nav-links.open{right:0}
   .nav-links .nav-a{color:rgba(255,255,255,.85);font-size:1rem;padding:.8rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
   .nav.scrolled .nav-links .nav-a{color:rgba(255,255,255,.85)}
   .nav-ham{display:flex}
   .nav-cta{display:none}
+
+  /* hero */
+  .hero-inner{padding:130px 1.1rem 90px;gap:2.2rem}
+  .hero-title{font-size:clamp(2rem,8vw,2.6rem);line-height:1.15;margin-bottom:1.2rem}
+  .hero-lede{font-size:.98rem}
+  .hero-quote-box{padding:1.6rem 1.3rem}
+  .hero-stats{gap:1.2rem;flex-wrap:wrap}
+  .hero-stats > *{min-width:46%}
+
+  /* services / info / cf */
   .info-grid{grid-template-columns:1fr;gap:1.2rem}
   .svc-grid{grid-template-columns:1fr;gap:1.2rem}
-  .hero-title{font-size:2.4rem}
+  .cf-row{grid-template-columns:1fr}
+  .contact-form-wrap{padding:1.8rem 1.4rem}
+
+  /* about */
   .about-img{aspect-ratio:4/4}
   .about-badge{padding:1.1rem 1.4rem;right:0;bottom:-.5rem}
   .ab-num{font-size:2rem}
-  .cf-row{grid-template-columns:1fr}
-  .contact-form-wrap{padding:1.8rem 1.4rem}
-  .aw-item{grid-template-columns:1fr;gap:.5rem;padding:1rem 1.2rem}
+
+  /* awards */
+  .aw-item{grid-template-columns:1fr;gap:.4rem;padding:1rem 1.2rem}
+  .aw-year{font-size:1.4rem}
   .aw-tag{justify-self:flex-start}
-  .aw-dot{left:-36px}
-  .awards-list{padding-left:40px}
+  .aw-dot{left:-32px;width:22px;height:22px;font-size:.65rem}
+  .awards-list{padding-left:38px}
+  .awards-list::before,.aw-progress{left:18px}
+  .trophy-card{max-width:100%}
+
+  /* vision / spec */
   .vm-card{padding:2.2rem 1.6rem 2rem}
   .vm-watermark{font-size:11rem;right:-20px;bottom:-30px}
-  .section{padding:4.5rem 0}
-  .trophy-card{max-width:100%}
-  .spec-item{grid-template-columns:auto 1fr;gap:1rem}
+  .spec-item{grid-template-columns:auto 1fr;gap:1rem;padding:1.2rem 1.3rem}
   .sp-ico{display:none}
+
+  /* buttons */
   .btn-fx .btn-label{padding:.85rem 1.1rem .85rem 1.3rem;font-size:.82rem}
   .btn-fx .btn-ico{width:38px}
+
+  /* pcta */
   .pcta{padding:5rem 0 4.5rem}
-  .pcta-stats{gap:1.2rem}
+  .pcta-stats{gap:1rem;flex-wrap:wrap;justify-content:center}
   .pcta-stat{min-width:45%}
   .pcta-sep{display:none}
   .pcta-actions{flex-direction:column;align-items:stretch}
+
+  /* contact cards */
+  .ci-item{padding:1.2rem}
 }
+
+/* ── SMALL PHONES (≤480px) ─────────────────────────────── */
 @media (max-width: 480px){
-  .hero-cta{flex-direction:column;align-items:stretch}
-  .hero-cta a{justify-content:space-between}
-  .hero-quote-box{padding:1.6rem 1.3rem}
+  html{font-size:14.5px}
+  .container{padding:0 .95rem}
+  .section{padding:3.8rem 0}
+
+  .nav-wrap{padding:0 .95rem}
+  .nav-brand-logo{height:40px}
+  .nav.scrolled .nav-brand-logo{height:38px}
+
+  .hero-inner{padding:120px .95rem 80px}
+  .hero-title{font-size:clamp(1.75rem,8.5vw,2.2rem)}
+  .hero-eyebrow{font-size:.95rem}
+  .hero-cta{flex-direction:column;align-items:stretch;gap:.7rem}
+  .hero-cta a{justify-content:space-between;width:100%}
+  .hero-quote-box{padding:1.4rem 1.1rem}
+
+  .sec-h2{font-size:clamp(1.55rem,7vw,2rem)}
+  .eyebrow{font-size:.65rem;letter-spacing:2px}
+
+  /* awards ultra-compact */
+  .awards-list{padding-left:32px}
+  .awards-list::before,.aw-progress{left:14px}
+  .aw-dot{left:-28px;width:20px;height:20px;font-size:.6rem}
+  .aw-item{padding:.9rem 1rem}
+
+  /* pcta stats → 2×2 grid */
+  .pcta-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem .8rem}
+  .pcta-stat{min-width:0;width:100%}
+  .pcta-n{font-size:1.9rem}
+  .pcta-l{font-size:.68rem;letter-spacing:1.2px}
+
+  /* vision watermark tame */
+  .vm-watermark{font-size:8rem;right:-10px;bottom:-20px}
+
+  /* trophy card */
+  .trophy-card{padding:1rem 1.1rem;gap:.8rem}
+  .trophy-ico{width:44px;height:44px;font-size:1.05rem}
+
+  /* about badge */
+  .about-badge{padding:.9rem 1.1rem;right:.5rem}
+  .ab-num{font-size:1.7rem}
+}
+
+/* ── TINY PHONES (≤360px) ──────────────────────────────── */
+@media (max-width: 360px){
+  html{font-size:14px}
+  .container{padding:0 .8rem}
+  .hero-title{font-size:1.6rem}
+  .nav-brand-logo{height:38px}
+  .pcta-stats{grid-template-columns:1fr}
+  .aw-year{font-size:1.2rem}
 }
 
 /* ── Reduce motion ─────────────────────────────────── */
