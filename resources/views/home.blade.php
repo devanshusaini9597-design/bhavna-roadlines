@@ -16,28 +16,30 @@
             <img src="{{ asset('images/logo.jpg') }}" alt="Bhavna Roadlines Pvt. Ltd." class="nav-brand-logo">
         </a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#hero"           class="nav-a active">Home</a></li>
+            <li><a href="#hero"                   class="nav-a active">Home</a></li>
             <li><a href="{{ route('about') }}"    class="nav-a">About Us</a></li>
             <li><a href="{{ route('services') }}" class="nav-a">Services</a></li>
             <li><a href="{{ route('gallery') }}"  class="nav-a">Gallery</a></li>
-            <li><a href="#awards"         class="nav-a">Awards</a></li>
+            <li><a href="#awards"                 class="nav-a">Awards</a></li>
             <li><a href="{{ route('contact') }}"  class="nav-a">Contact</a></li>
+            <li><a href="{{ route('contact') }}"  class="nav-cta-mobile">Get a Quote <i class="fas fa-arrow-right"></i></a></li>
         </ul>
         <a href="{{ route('contact') }}" class="nav-cta">Get a Quote</a>
-        <button class="nav-ham" id="navHam" aria-label="Menu"><span></span><span></span><span></span></button>
+        <button class="nav-ham" id="navHam" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
 </nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 {{-- ══════════════════════════════════
      HERO
 ══════════════════════════════════ --}}
 <section class="hero" id="hero">
     <div class="hero-media" id="heroMedia">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto"
-               poster="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1920&q=80">
-            <source src="https://videos.pexels.com/video-files/2103099/2103099-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+               poster="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1600&q=70">
+            <source src="https://videos.pexels.com/video-files/2103099/2103099-hd_1920_1080_30fps.mp4" type="video/mp4">
             <source src="https://cdn.coverr.co/videos/coverr-a-truck-on-the-road-7671/1080p.mp4" type="video/mp4">
-            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1920&q=80" alt="Bhavna Roadlines logistics fleet">
+            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1600&q=70" alt="Bhavna Roadlines logistics fleet" fetchpriority="high" decoding="async">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-grain"></div>
@@ -132,10 +134,10 @@
         <div class="svc-grid">
             @php
                 $services = [
-                    ['01','Parcel Services','fa-box-open','Fast, reliable parcel delivery with real-time tracking across every major Indian city.','https://images.unsplash.com/photo-1616432043562-3671ea2e5242?auto=format&fit=crop&w=900&q=80'],
-                    ['02','Customized Logistics Planning','fa-route','Tailored supply-chain strategies that reduce costs and optimize routes for your business.','https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=80'],
-                    ['03','Over Dimensional Cargo (ODC)','fa-weight-hanging','Expert handling of oversized and heavy cargo — specialized equipment, full permit management.','https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=80'],
-                    ['04','Turnkey Project Logistics','fa-industry','Complete project logistics, from strategic planning to final execution for industrial projects.','https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=900&q=80'],
+                    ['01','Parcel Services','fa-box-open','Fast, reliable parcel delivery with real-time tracking across every major Indian city.','https://images.unsplash.com/photo-1616432043562-3671ea2e5242?auto=format&fit=crop&w=600&q=70'],
+                    ['02','Customized Logistics Planning','fa-route','Tailored supply-chain strategies that reduce costs and optimize routes for your business.','https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=600&q=70'],
+                    ['03','Over Dimensional Cargo (ODC)','fa-weight-hanging','Expert handling of oversized and heavy cargo — specialized equipment, full permit management.','https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=70'],
+                    ['04','Turnkey Project Logistics','fa-industry','Complete project logistics, from strategic planning to final execution for industrial projects.','https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=70'],
                 ];
             @endphp
 
@@ -177,7 +179,7 @@
         <div class="about-grid">
             <div class="about-left" data-aos="fade-right">
                 <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=1200&q=80" alt="Bhavna Roadlines fleet on highway">
+                    <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=900&q=70" alt="Bhavna Roadlines fleet on highway" loading="lazy" decoding="async">
                 </div>
                 <div class="about-badge">
                     <span class="ab-num">25<sup>+</sup></span>
@@ -311,8 +313,8 @@
 ══════════════════════════════════ --}}
 <section class="pcta" id="pcta">
     <div class="pcta-bg" id="pctaBg">
-        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80"
-             alt="Bhavna Roadlines highway fleet" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1400&q=65"
+             alt="Bhavna Roadlines highway fleet" loading="lazy" decoding="async">
     </div>
     <div class="pcta-overlay"></div>
     <div class="pcta-grid-lines" aria-hidden="true"></div>
@@ -573,17 +575,24 @@ const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-/* Mobile nav */
-const ham = document.getElementById('navHam');
-const links = document.getElementById('navLinks');
-ham.addEventListener('click', () => {
-    ham.classList.toggle('open');
-    links.classList.toggle('open');
-});
-document.querySelectorAll('.nav-a').forEach(a => a.addEventListener('click', () => {
-    ham.classList.remove('open');
-    links.classList.remove('open');
-}));
+/* Mobile nav — hamburger + backdrop + body lock */
+const ham      = document.getElementById('navHam');
+const links    = document.getElementById('navLinks');
+const backdrop = document.getElementById('navBackdrop');
+
+const setNav = (open) => {
+    ham.classList.toggle('open', open);
+    links.classList.toggle('open', open);
+    backdrop.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+    ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+};
+ham.addEventListener('click', () => setNav(!ham.classList.contains('open')));
+backdrop.addEventListener('click', () => setNav(false));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false); });
+document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => setNav(false))
+);
 
 /* Smooth scroll for on-page hash links only */
 document.querySelectorAll('a[href^="#"]').forEach(a => {

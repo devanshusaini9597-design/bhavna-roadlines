@@ -195,12 +195,33 @@ ul,ol{list-style:none}
 .nav-cta span,.nav-cta{z-index:1}
 .nav-cta:hover::before{transform:translateX(0) skewX(-12deg)}
 .nav-cta:hover{color:var(--white);transform:translateY(-2px);box-shadow:0 10px 26px rgba(30,85,199,.5)}
-.nav-ham{display:none;flex-direction:column;gap:5px;padding:4px}
-.nav-ham span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .3s var(--ease)}
+.nav-cta-mobile{display:none}
+.nav-ham{
+  display:none;flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;width:44px;height:44px;border-radius:10px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:background .3s,border-color .3s
+}
+.nav-ham:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)}
+.nav-ham span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:all .35s var(--ease)}
+.nav.scrolled .nav-ham{background:var(--g50);border-color:var(--g200)}
+.nav.scrolled .nav-ham:hover{background:var(--g100)}
 .nav.scrolled .nav-ham span{background:var(--g900)}
+.nav-ham.open{background:var(--blue);border-color:var(--blue)}
+.nav-ham.open span{background:var(--white)}
 .nav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-ham.open span:nth-child(2){opacity:0}
+.nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Backdrop behind mobile drawer */
+.nav-backdrop{
+  position:fixed;inset:0;background:rgba(10,14,23,.55);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;z-index:998
+}
+.nav-backdrop.open{opacity:1;visibility:visible}
+body.nav-open{overflow:hidden}
 
 /* ================================================================
    HERO — video + parallax
@@ -808,14 +829,29 @@ ul,ol{list-style:none}
   .nav-brand-logo{height:44px}
   .nav.scrolled .nav-brand-logo{height:40px}
   .nav-links{
-    position:fixed;top:0;right:-100%;width:82%;max-width:320px;height:100vh;
-    background:var(--ink-2);flex-direction:column;gap:.5rem;padding:6rem 2rem 2rem;
-    transition:right .4s var(--ease);box-shadow:-20px 0 40px rgba(0,0,0,.4);
-    overflow-y:auto
+    position:fixed;top:0;right:-100%;width:84%;max-width:340px;height:100dvh;height:100vh;
+    background:linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 100%);
+    flex-direction:column;gap:0;padding:5.5rem 1.5rem 2rem;
+    transition:right .4s var(--ease);box-shadow:-24px 0 50px rgba(0,0,0,.5);
+    overflow-y:auto;z-index:999
   }
   .nav-links.open{right:0}
-  .nav-links .nav-a{color:rgba(255,255,255,.85);font-size:1rem;padding:.8rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav-links li{width:100%}
+  .nav-links .nav-a{
+    display:block;width:100%;color:rgba(255,255,255,.85);font-size:1.02rem;font-weight:500;
+    padding:1.05rem .3rem;border-bottom:1px solid rgba(255,255,255,.06);
+    letter-spacing:.3px;transition:color .25s,padding-left .25s
+  }
+  .nav-links .nav-a::after{display:none}
+  .nav-links .nav-a:hover,.nav-links .nav-a.active{color:var(--blue-lite);padding-left:.6rem}
   .nav.scrolled .nav-links .nav-a{color:rgba(255,255,255,.85)}
+  .nav-links .nav-cta-mobile{
+    display:flex;align-items:center;justify-content:center;gap:.5rem;
+    margin-top:1.4rem;padding:1rem 1.2rem;background:var(--blue);color:#fff;
+    border-radius:var(--r-btn);font-weight:600;font-size:.92rem;letter-spacing:.4px;
+    box-shadow:0 10px 26px rgba(30,85,199,.4);transition:all .3s var(--ease)
+  }
+  .nav-links .nav-cta-mobile:hover{background:var(--blue-dk);transform:translateY(-2px)}
   .nav-ham{display:flex}
   .nav-cta{display:none}
 
