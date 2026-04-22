@@ -22,9 +22,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # ── Apache MPM: force mpm_prefork (mod_php is not thread-safe) ──
-# Disabling the others prevents "More than one MPM loaded" at boot.
-RUN a2dismod -f mpm_event mpm_worker 2>/dev/null; \
-    a2enmod mpm_prefork rewrite headers
+# Hard-remove any other MPM load files, then enable prefork + our mods.
+# Verify only ONE mpm module ends up loaded — fail the build otherwise.
+RUN set -eux; \
+    ls -la /etc/apache2/mods-enabled/ | grep -i mpm || true; \
+    rm -f /etc/apache2/mods-enabled/mpm_event.* \
+          /etc/apache2/mods-enabled/mpm_worker.*; \
+    ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load; \
+    ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf; \
+    a2enmod rewrite headers; \
+    echo "── mods-enabled MPM files ──"; \
+    ls -la /etc/apache2/mods-enabled/ | grep -i mpm; \
+    mpm_count=$(ls /etc/apache2/mods-enabled/ | grep -E '^mpm_.*\.load$' | wc -l); \
+    if [ "$mpm_count" -ne 1 ]; then echo "FATAL: $mpm_count MPMs enabled"; exit 1; fi; \
+    apache2ctl -M 2>&1 | grep -i mpm || true
 
 # ── Composer ─────────────────────────────────────────────────
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
