@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <!-- Logo Background -->
+  <rect x="0" y="0" width="60" height="60" rx="8" fill="#0066cc"/>
+  
+  <!-- Truck Icon -->
+  <g fill="white">
+    <!-- Truck body -->
+    <rect x="10" y="25" width="30" height="18" rx="2"/>
+    <!-- Truck cab -->
+    <rect x="42" y="30" width="12" height="13" rx="2"/>
+    <!-- Truck window -->
+    <rect x="44" y="32" width="8" height="6" rx="1" fill="#0066cc"/>
+    <!-- Wheels -->
+    <circle cx="18" cy="46" r="4"/>
+    <circle cx="48" cy="46" r="4"/>
+  </g>
+  
+  <!-- Company Text -->
+  <text x="70" y="28" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1a1a2e">BHAVNA</text>
+  <text x="70" y="48" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0066cc">ROADLINES</text>
+</svg>

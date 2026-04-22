@@ -1,0 +1,40 @@
+# ── Secrets ───────────────────────────────
+.env
+.env.backup
+.env.production
+.env.local
+auth.json
+
+# ── Dependencies ──────────────────────────
+/vendor/
+/node_modules/
+/public/hot
+/public/storage
+
+# ── Laravel framework caches ──────────────
+/storage/*.key
+/storage/app/public/*
+/storage/debugbar/
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+/storage/logs/*
+!/storage/logs/.gitkeep
+/bootstrap/cache/*.php
+
+# ── IDE / OS ──────────────────────────────
+.idea/
+.vscode/
+.fleet/
+.windsurf/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ── Build / logs ──────────────────────────
+npm-debug.log
+yarn-error.log
+*.log
+/public/build

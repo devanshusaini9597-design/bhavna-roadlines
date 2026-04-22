@@ -1,0 +1,43 @@
+# ── Critical: never ship secrets or host-specific caches ──
+.env
+.env.*
+!.env.example
+
+# ── Dependencies (installed fresh inside the image) ────────
+vendor/
+node_modules/
+
+# ── Dev tooling & VCS ──────────────────────────────────────
+.git/
+.gitignore
+.gitattributes
+.github/
+.idea/
+.vscode/
+.fleet/
+.windsurf/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Build artefacts ────────────────────────────────────────
+public/hot
+public/storage
+storage/*.key
+storage/logs/*
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/framework/testing/*
+bootstrap/cache/*.php
+
+# ── OS junk ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Docs / local-only ──────────────────────────────────────
+README.md
+RAILWAY-DEPLOY.md
+tests/
+phpunit.xml

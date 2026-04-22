@@ -1,0 +1,19 @@
+* text=auto eol=lf
+
+# Shell scripts must keep LF line endings (run inside Linux container)
+*.sh          text eol=lf
+docker/*      text eol=lf
+Dockerfile    text eol=lf
+
+# Binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.mp4  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.eot  binary
