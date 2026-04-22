@@ -724,6 +724,50 @@ ul,ol{list-style:none}
 .pcta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
 /* ================================================================
+   PREMIUM FOOTER
+================================================================ */
+.pfooter{background:var(--ink);color:rgba(255,255,255,.72);padding:5rem 0 0;border-top:1px solid rgba(255,255,255,.06)}
+.pfooter-inner{position:relative}
+.pfooter-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:3rem;padding-bottom:3rem;
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.pfooter-brand{max-width:360px}
+.pfooter-logo{display:inline-block;margin-bottom:1.2rem}
+.pfooter-logo img{height:62px;width:auto;border-radius:50%;background:#fff;padding:2px}
+.pfooter-brand p{font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.6);margin-bottom:1.4rem}
+.pfooter-social{display:flex;gap:.6rem}
+.pfooter-social a{
+  width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.7);font-size:.9rem;transition:all .3s var(--ease)
+}
+.pfooter-social a:hover{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-3px)}
+
+.pfooter-col h4{
+  color:#fff;font-size:.82rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:1.3rem;position:relative;padding-bottom:.7rem
+}
+.pfooter-col h4::after{
+  content:'';position:absolute;left:0;bottom:0;width:28px;height:2px;background:var(--blue-mid)
+}
+.pfooter-col ul{display:flex;flex-direction:column;gap:.65rem}
+.pfooter-col a{font-size:.9rem;color:rgba(255,255,255,.62);transition:color .25s, padding-left .25s}
+.pfooter-col a:hover{color:var(--blue-lite);padding-left:4px}
+
+.pfooter-contact li{display:flex;gap:.75rem;align-items:flex-start;font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.65)}
+.pfooter-contact i{color:var(--blue-lite);margin-top:4px;width:14px;flex-shrink:0}
+
+.pfooter-bottom{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;
+  padding:1.5rem 0;font-size:.82rem;color:rgba(255,255,255,.5)
+}
+.pfooter-legal{display:flex;gap:.7rem;align-items:center}
+.pfooter-legal a{color:rgba(255,255,255,.5);transition:color .25s}
+.pfooter-legal a:hover{color:var(--blue-lite)}
+.pfooter-legal span{color:rgba(255,255,255,.25)}
+
+/* ================================================================
    RESPONSIVE — tablets → phones → tiny phones
 ================================================================ */
 
@@ -747,6 +791,8 @@ ul,ol{list-style:none}
   .vm-watermark{font-size:14rem}
   .nav-brand-logo{height:46px}
   .nav.scrolled .nav-brand-logo{height:42px}
+  .pfooter-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .pfooter-brand{grid-column:1 / -1;max-width:none}
 }
 
 /* ── PHONES (≤768px) ───────────────────────────────────── */
@@ -820,6 +866,12 @@ ul,ol{list-style:none}
 
   /* contact cards */
   .ci-item{padding:1.2rem}
+
+  /* footer */
+  .pfooter{padding:4rem 0 0}
+  .pfooter-grid{grid-template-columns:1fr;gap:2.2rem;padding-bottom:2.2rem}
+  .pfooter-logo img{height:54px}
+  .pfooter-bottom{flex-direction:column;text-align:center;gap:.5rem;padding:1.3rem 0}
 }
 
 /* ── SMALL PHONES (≤480px) ─────────────────────────────── */

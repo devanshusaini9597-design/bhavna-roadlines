@@ -1,12 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.premium')
 @section('title', 'Bhavna Roadlines — Trusted Logistics & Transportation Partner')
 
 @section('styles')
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <link rel="stylesheet" href="{{ asset('css/home-premium.css') }}">
-<style>.header{display:none!important}</style>
 @endsection
 
 @section('content')
@@ -508,6 +504,60 @@
         </div>
     </div>
 </section>
+
+{{-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ --}}
+<footer class="pfooter">
+    <div class="container pfooter-inner">
+        <div class="pfooter-grid">
+            <div class="pfooter-brand">
+                <a href="{{ route('home') }}" class="pfooter-logo">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Bhavna Roadlines">
+                </a>
+                <p>Leading logistics &amp; transportation company moving India forward since 1999.</p>
+                <div class="pfooter-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="pfooter-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="{{ route('about') }}">About Us</a></li>
+                    <li><a href="{{ route('services') }}">Services</a></li>
+                    <li><a href="{{ route('gallery') }}">Gallery</a></li>
+                    <li><a href="{{ route('careers') }}">Careers</a></li>
+                    <li><a href="{{ route('investor') }}">Investor Relations</a></li>
+                </ul>
+            </div>
+            <div class="pfooter-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="{{ route('services') }}">Full Truckload (FTL)</a></li>
+                    <li><a href="{{ route('services') }}">Part Truckload (PTL)</a></li>
+                    <li><a href="{{ route('services') }}">Express Delivery</a></li>
+                    <li><a href="{{ route('services') }}">Warehousing</a></li>
+                    <li><a href="{{ route('services') }}">ODC Transport</a></li>
+                </ul>
+            </div>
+            <div class="pfooter-col">
+                <h4>Get in Touch</h4>
+                <ul class="pfooter-contact">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Industrial Area, Phase 1<br>Chandigarh — 160002</span></li>
+                    <li><i class="fas fa-phone-alt"></i><span>+91 172 XXX XXXX</span></li>
+                    <li><i class="fas fa-envelope"></i><span>info@bhavnaroadlines.in</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pfooter-bottom">
+            <p>&copy; {{ date('Y') }} Bhavna Roadlines Pvt. Ltd. — All rights reserved.</p>
+            <p class="pfooter-legal"><a href="#">Privacy Policy</a><span>·</span><a href="#">Terms of Service</a></p>
+        </div>
+    </div>
+</footer>
 
 @endsection
 
