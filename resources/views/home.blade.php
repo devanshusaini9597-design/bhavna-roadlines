@@ -17,8 +17,7 @@
 <nav class="nav" id="nav">
     <div class="nav-wrap">
         <a href="{{ route('home') }}" class="nav-brand">
-            <span class="nav-brand-mark">BR</span>
-            <span class="nav-brand-text">Bhavna<strong>Roadlines</strong></span>
+            <img src="{{ asset('images/logo.jpg') }}" alt="Bhavna Roadlines Pvt. Ltd." class="nav-brand-logo">
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#hero"           class="nav-a active">Home</a></li>
