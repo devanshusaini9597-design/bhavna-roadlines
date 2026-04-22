@@ -574,31 +574,53 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 parallax();
 
-/* ── AWARDS — step-by-step reveal TIED TO SCROLL ────
-   Each item animates in individually as you scroll past it,
-   and the vertical progress line grows item-by-item. */
+/* ── AWARDS — continuous "running line" tied to scroll ─
+   The vertical progress bar fills smoothly as the user
+   scrolls through the awards list; each item fades in the
+   moment the progress line reaches its dot. */
 const awardsList = document.getElementById('awardsList');
 const awProgress = document.getElementById('awProgress');
-if (awardsList) {
+if (awardsList && awProgress) {
     const items = Array.from(awardsList.querySelectorAll('.aw-item'));
-    const total = items.length;
-    let revealed = 0;
-    const updateProgress = () => {
-        if (!awProgress) return;
-        const pct = Math.min(100, (revealed / total) * 100);
-        awProgress.style.height = `calc((100% - 40px) * ${pct / 100})`;
+    let awTicking = false;
+
+    const runLine = () => {
+        awTicking = false;
+        const rect = awardsList.getBoundingClientRect();
+        const vh   = window.innerHeight || document.documentElement.clientHeight;
+
+        // Fill starts when list top crosses 80% viewport and completes
+        // when list bottom crosses 20% viewport — smooth & natural.
+        const start  = vh * 0.80;
+        const end    = vh * 0.20;
+        const passed = start - rect.top;                 // px scrolled past start line
+        const span   = rect.height + (start - end);      // total travel distance
+        let progress = passed / span;
+        if (progress < 0) progress = 0;
+        if (progress > 1) progress = 1;
+
+        // The CSS reserves 20px top + 20px bottom inside the list.
+        awProgress.style.height = `calc((100% - 40px) * ${progress})`;
+
+        // Reveal each item the instant the line's tip reaches its dot.
+        const tipY = rect.top + 20 + (rect.height - 40) * progress;
+        items.forEach((el) => {
+            if (el.classList.contains('in')) return;
+            const r = el.getBoundingClientRect();
+            const dotY = r.top + r.height / 2;
+            if (tipY >= dotY) el.classList.add('in');
+        });
     };
-    items.forEach((el) => {
-        const io = new IntersectionObserver(([e]) => {
-            if (e.isIntersecting) {
-                el.classList.add('in');
-                revealed++;
-                updateProgress();
-                io.unobserve(el);
-            }
-        }, { threshold: 0.45, rootMargin: '0px 0px -10% 0px' });
-        io.observe(el);
-    });
+
+    const onAwScroll = () => {
+        if (awTicking) return;
+        awTicking = true;
+        requestAnimationFrame(runLine);
+    };
+
+    window.addEventListener('scroll', onAwScroll, { passive: true });
+    window.addEventListener('resize', onAwScroll);
+    runLine();
 }
 
 /* ── PARALLAX CTA banner — slow background drift ───── */
