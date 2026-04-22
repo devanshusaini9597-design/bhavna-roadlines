@@ -19,8 +19,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zip unzip git curl ca-certificates \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" pdo pdo_mysql mbstring exif pcntl bcmath gd zip \
-    && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
+
+# ── Apache MPM: force mpm_prefork (mod_php is not thread-safe) ──
+# Disabling the others prevents "More than one MPM loaded" at boot.
+RUN a2dismod -f mpm_event mpm_worker 2>/dev/null; \
+    a2enmod mpm_prefork rewrite headers
 
 # ── Composer ─────────────────────────────────────────────────
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
